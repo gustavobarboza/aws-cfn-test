@@ -1,5 +1,5 @@
 {
-  "app": "mvn -e -q compile exec:java",
+  "app": "./mvnw -e -q compile exec:java",
   "watch": {
     "include": [
       "**"
@@ -13,6 +13,9 @@
     ]
   },
   "context": {
+    "accountId": "549564486499",
+    "region": "us-east-1",
+    "applicationName": "spring-app",
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": [

@@ -1,0 +1,21 @@
+{
+  "name": "aws",
+  "version": "1.0.0",
+  "description": "This is a blank project for CDK development with Java.",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "cdk bootstrap --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.BootstrapApp\"",
+    "network:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.NetworkApp\" --require-approval never",
+    "network:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.NetworkApp\" --force --require-approval never",
+    "repository:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.DockerRepositoryApp\" --require-approval never",
+    "repository:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.DockerRepositoryApp\" --force --require-approval never",
+    "service:deploy": "cdk deploy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.ServiceApp\" --require-approval never",
+    "service:destroy": "cdk destroy --app \"./mvnw -e -q compile exec:java -Dexec.mainClass=com.myorg.cdk.ServiceApp\" --force --require-approval never"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-cdk": "2.161.1"
+  }
+}
