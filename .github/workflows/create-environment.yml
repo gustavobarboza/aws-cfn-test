@@ -1,0 +1,46 @@
+# This is a basic workflow that is manually triggered
+
+name: Manually create a shared environment
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      environmentName:
+        description: 'The name of the environment to create'
+        required: true
+
+env:
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+  
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy-network-stack"
+  deploy-network-stack:
+    if: github.ref == 'ref/heads/main'
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    name: Deploy the network stack
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+    
+        - name: Set up JDK 17
+          uses: actions/setup-java@v4
+          with:
+              distribution: 'temurin'
+              java-version: 17
+              cache: 'maven'
+    
+        - name: NPM install
+          working-directory: cdk
+          run: npm install
+    
+        - name: Deploy network stack
+          working-directory: cdk
+          run: npm run network:deploy -- -c environmentName=${{ github.event.inputs.environmentName }}
